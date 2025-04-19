@@ -238,4 +238,27 @@ public class Solution
         result[0] = 1;
         return result;
     }
+    
+    public static IList<IList<string>> FindReversedPairs(string[] strs) {
+        IList<IList<string>> result = new List<IList<string>>();
+        HashSet<string> seen = new HashSet<string>();
+        HashSet<string> addedPairs = new HashSet<string>();
+        
+        foreach (string s in strs) {
+            seen.Add(s);
+        }
+        
+        foreach (string s in strs) {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            string reversed = new string(charArray);
+            
+            if (seen.Contains(reversed) && s != reversed && !addedPairs.Contains(reversed + s)) {
+                result.Add(new List<string> { s, reversed });
+                addedPairs.Add(s + reversed);
+            }
+        }
+        
+        return result;
+    }
 }
