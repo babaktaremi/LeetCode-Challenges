@@ -1,4 +1,6 @@
-﻿Console.WriteLine("Hello, World!");
+﻿
+
+Console.WriteLine("Hello, World!");
 
 
 
@@ -260,5 +262,30 @@ public class Solution
         }
         
         return result;
+    }
+    
+    public static int MaximumNumberOfStringPairs(string[] words)
+    {
+        int result = 0;
+      
+        HashSet<string> addedPairs = new HashSet<string>();
+        
+        foreach (var s in words.AsSpan()) {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            string reversed = new string(charArray);
+            
+            if(s==reversed)
+                continue;
+            
+            if (words.Contains(reversed) && !addedPairs.Contains(reversed + s))
+            {
+                result++;
+                addedPairs.Add(s + reversed);
+            }
+        }
+
+        return result;
+
     }
 }
