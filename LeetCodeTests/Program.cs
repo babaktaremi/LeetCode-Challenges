@@ -288,4 +288,50 @@ public class Solution
         return result;
 
     }
+    
+    public static void MoveZeroes(int[] nums)
+    {
+        int lastNonZeroIndex = 0;
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] != 0)
+            {
+                nums[lastNonZeroIndex] = nums[i];
+                lastNonZeroIndex++;
+            }
+        }
+
+        for (int i = lastNonZeroIndex; i < nums.Length; i++)
+        {
+            nums[i] = 0;
+        }
+    }
+    
+    public static void MoveZeroesRuntimeOptimized(int[] nums) {
+        int lastNonZeroPos = 0;
+        for (int i = 0; i < nums.Length; i++) {
+            if (nums[i] != 0) {
+                // Swap nums[i] with nums[lastNonZeroPos]
+                (nums[i], nums[lastNonZeroPos]) = (nums[lastNonZeroPos], nums[i]);
+                lastNonZeroPos++;
+            }
+        }
+    }
+    
+    public static void MoveZeroesAllOptimized(int[] nums) {
+        int lastNonZeroIndex = 0;
+    
+        // First pass: Move all non-zero elements to the front
+        for (int i = 0; i < nums.Length; i++) {
+            if (nums[i] != 0) {
+                nums[lastNonZeroIndex++] = nums[i];
+            }
+        }
+    
+        // Second pass: Fill remaining positions with zeros (optimized)
+        while (lastNonZeroIndex < nums.Length) {
+            nums[lastNonZeroIndex++] = 0;
+        }
+    }
 }
