@@ -1,7 +1,8 @@
-﻿Console.WriteLine("Hello, World!");
+﻿
 
-var t = Solution.IsSubsequence("b", "abc");
+Console.WriteLine("Hello, World!");
 
+var t=Solution.LengthOfLastWord("   fly me   to   the moon  ");
 
 public class Solution
 {
@@ -357,22 +358,92 @@ public class Solution
         }
     }
 
-
-    public static bool IsSubsequence(string s, string t)
+    public static bool IsAcronym(IList<string> words, string s)
     {
-        if (s.Length == 0) return true;
+            if (string.IsNullOrEmpty(s))
+                return false;
 
-        var sIndex = 0;
+            if (words.Count == 0)
+                return false;
 
-        for (int i = 0; i < t.Length; i++)
+            if (words.Count != s.Length)
+                return false;
+
+            for(int i=0; i<s.Length ; i++)
+            {
+                if (words[i][0] != s[i])
+                    return false;
+            }
+
+            return true;
+    }
+    
+    public static bool IsPalindrome(int x)
+    {
+        // if (x < 0)
+        //     return false;
+        //
+        // var stringX= x.ToString();
+        //
+        // for (int i = 0; i < stringX.Length / 2; i++)
+        // {
+        //     if (stringX[i] != stringX[stringX.Length - 1 - i])
+        //         return false;
+        // }
+        //
+        // return true;
+
+
+        if (x < 0)
+            return false;
+        
+        var palindrome = 0;
+        var original = x;
+        
+        while (x>0)
         {
-            if (sIndex >= s.Length)
-                break;
-
-            if (t[i] == s[sIndex])
-                sIndex++;
+            var digit = x % 10;
+            palindrome= palindrome *10 + digit;
+            x /= 10;
         }
 
-        return sIndex == s.Length;
+        return palindrome == original;
+    }
+    
+    
+    public static int RemoveElement(int[] nums, int val) {
+        
+        var j = 0;
+        
+        for (int i = 0; i <nums.Length; i++)
+        {
+            if (nums[i] != val)
+            {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+
+        return j;
+    }
+    
+    public static int LengthOfLastWord(string s) {
+        
+        if (string.IsNullOrEmpty(s))
+            return 0;
+
+        var length = 0;
+        var i = s.Length - 1;
+
+        while (i >= 0 && s[i] == ' ')
+            i--;
+
+        while (i >= 0 && s[i] != ' ')
+        {
+            length++;
+            i--;
+        }
+
+        return length;
     }
 }
