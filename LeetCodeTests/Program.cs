@@ -446,4 +446,22 @@ public class Solution
 
         return length;
     }
+    
+    public static bool IsSubsequence(string s, string t)
+    {
+        if (s.Length == 0) return true;
+
+        var sIndex = 0;
+
+        for (int i = 0; i < t.Length; i++)
+        {
+            if (sIndex >= s.Length)
+                break;
+
+            if (t[i] == s[sIndex])
+                sIndex++;
+        }
+
+        return sIndex == s.Length;
+    }
 }
