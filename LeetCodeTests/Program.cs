@@ -6,23 +6,6 @@ var t=Solution.LengthOfLastWord("   fly me   to   the moon  ");
 
 public class Solution
 {
-    public int[] TwoSum(int[] nums, int target)
-    {
-        var indexes = new Dictionary<int, int>();
-
-
-        for (int i = 0; i < nums.Length; i++)
-        {
-            int complement = target - nums[i];
-
-            if (indexes.TryGetValue(complement, out var index))
-                return [index, i];
-
-            indexes[nums[i]] = i;
-        }
-
-        return [];
-    }
 
     public static int LengthOfLongestSubstring(string s)
     {
@@ -463,5 +446,28 @@ public class Solution
         }
 
         return sIndex == s.Length;
+    }
+    
+    public int[] TwoSum(int[] numbers, int target)
+    {
+
+        int left = 0;
+        int right = numbers.Length-1;
+
+        while (left < right)
+        {
+            var sum = numbers[left] + numbers[right];
+            
+            if (sum == target)
+                return [++left, ++right];
+
+            if (sum > target)
+                right--;
+
+            else
+                left++;
+        }
+
+        return [];
     }
 }
